@@ -9,7 +9,7 @@
 
 
     <com.google.android.material.imageview.ShapeableImageView
-        android:id="@+id/imageView7"
+        android:id="@+id/homeOptionsMenu"
         android:layout_width="28dp"
         android:layout_height="42dp"
         android:layout_marginTop="8dp"
@@ -34,11 +34,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:spanCount="2"
+        android:layout_marginTop="8dp"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        tools:listitem="@layout/category_row"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:spanCount="2"
+        tools:listitem="@layout/home_row" />
 </androidx.constraintlayout.widget.ConstraintLayout>

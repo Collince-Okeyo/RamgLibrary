@@ -8,16 +8,17 @@
         <entry key="app/src/main/res/layout/category_row.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/curve.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/display_row.xml" value="0.17447916666666666" />
-        <entry key="app/src/main/res/layout/fragment_add_books.xml" value="0.17447916666666666" />
-        <entry key="app/src/main/res/layout/fragment_display.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/layout/fragment_add_books.xml" value="0.1574074074074074" />
+        <entry key="app/src/main/res/layout/fragment_display.xml" value="0.1574074074074074" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/fragment_log_in.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_register.xml" value="0.17447916666666666" />
-        <entry key="app/src/main/res/layout/fragment_screen_one.xml" value="0.25" />
-        <entry key="app/src/main/res/layout/fragment_screen_three.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_screen_one.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/layout/fragment_screen_three.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_screen_two.xml" value="0.1574074074074074" />
         <entry key="app/src/main/res/layout/fragment_splash.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/fragment_splash2.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/layout/home_row.xml" value="0.17447916666666666" />
       </map>
     </option>
   </component>

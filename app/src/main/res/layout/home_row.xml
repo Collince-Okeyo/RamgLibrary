@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/itemImageView"
+            android:id="@+id/categoryImageView"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginStart="4dp"
@@ -22,7 +22,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/nameTv"
+            android:id="@+id/categoryNameTv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
             android:textColor="@color/black"
             android:textStyle="bold"
             android:text="TextView"
-            app:layout_constraintStart_toStartOf="@+id/itemImageView"
-            app:layout_constraintTop_toBottomOf="@+id/itemImageView" />
+            app:layout_constraintStart_toStartOf="@+id/categoryImageView"
+            app:layout_constraintTop_toBottomOf="@+id/categoryImageView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
