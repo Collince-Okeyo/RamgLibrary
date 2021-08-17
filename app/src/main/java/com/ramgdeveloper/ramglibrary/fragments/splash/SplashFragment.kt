@@ -5,15 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
 import com.ramgdeveloper.ramglibrary.R
+import com.ramgdeveloper.ramglibrary.databinding.FragmentSplash2Binding
 
 class SplashFragment : Fragment() {
+    private lateinit var binding: FragmentSplash2Binding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_splash2, container, false)
+       binding = FragmentSplash2Binding.inflate(inflater, container, false)
+
+        binding.imageView.setOnClickListener {
+            findNavController().navigate(R.id.action_splashFragment_to_screenOneFragment)
+        }
+
+        return binding.root
     }
 }
