@@ -18,9 +18,10 @@ class SplashFragment : Fragment() {
     ): View? {
        binding = FragmentSplash2Binding.inflate(inflater, container, false)
 
-        binding.imageView.setOnClickListener {
+
+       /* binding.imageView.setOnClickListener {
             findNavController().navigate(R.id.action_splashFragment_to_screenOneFragment)
-        }
+        }*/
 
         return binding.root
     }

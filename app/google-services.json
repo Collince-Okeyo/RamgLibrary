@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "291129252712",
+    "project_id": "ramglibrary",
+    "storage_bucket": "ramglibrary.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291129252712:android:36b4b8baf5ee84445854dd",
+        "android_client_info": {
+          "package_name": "com.ramgdeveloper.ramglibrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291129252712-d161o1i86b60u691u0qoebhi682hufbh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB17kT0rlKZAuCFqgHtcvre9GS53gM1dk4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291129252712-d161o1i86b60u691u0qoebhi682hufbh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
