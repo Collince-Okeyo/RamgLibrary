@@ -12,14 +12,16 @@
         tools:layout="@layout/fragment_splash2" >
         <action
             android:id="@+id/splash_to_home"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/my_nav" />
         <action
             android:id="@+id/splash_to_login"
             app:destination="@id/logInFragment"
             app:popUpTo="@id/my_nav" />
         <action
             android:id="@+id/action_splashFragment_to_viewPagerFragment"
-            app:destination="@id/viewPagerFragment" />
+            app:destination="@id/viewPagerFragment"
+            app:popUpTo="@id/my_nav" />
     </fragment>
     <fragment
         android:id="@+id/homeFragment"
