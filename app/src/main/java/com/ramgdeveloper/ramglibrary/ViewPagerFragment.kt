@@ -1,21 +1,20 @@
-package com.ramgdeveloper.ramglibrary.fragments.auth
+package com.ramgdeveloper.ramglibrary
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
-import com.ramgdeveloper.ramglibrary.R
-import com.ramgdeveloper.ramglibrary.databinding.FragmentLogInBinding
+import com.ramgdeveloper.ramglibrary.databinding.FragmentViewPagerBinding
 
-class LogInFragment : Fragment() {
-    private lateinit var binding: FragmentLogInBinding
+class ViewPagerFragment : Fragment() {
+    private lateinit var binding: FragmentViewPagerBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentViewPagerBinding.inflate(inflater, container, false)
 
         return binding.root
     }

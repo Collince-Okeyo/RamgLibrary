@@ -1,4 +1,4 @@
-package com.ramgdeveloper.ramglibrary.fragments.Onboarding
+package com.ramgdeveloper.ramglibrary.fragments.onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,10 +16,7 @@ class ScreenThreeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding= FragmentScreenThreeBinding.inflate(inflater, container, false)
-        binding.buttonFinish.setOnClickListener {
-            findNavController().navigate(R.id.action_screenThreeFragment_to_logInFragment)
-        }
+
         return binding.root
     }
 }

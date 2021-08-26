@@ -16,13 +16,7 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.fabAdd.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_displayFragment)
-        }
-        binding.homeOptionsMenu.setOnClickListener {
-            findNavController().navigate(R.id.action_homeFragment_to_addBooksFragment)
-        }
+
         return binding.root
     }
 }

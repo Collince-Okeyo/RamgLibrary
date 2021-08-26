@@ -16,10 +16,7 @@ class RegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater, container,    false)
-        binding.registerButton.setOnClickListener {
-            findNavController().navigate(R.id.action_registerFragment_to_homeFragment)
-        }
+
         return binding.root
     }
 }

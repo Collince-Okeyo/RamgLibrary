@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".fragments.Onboarding.ScreenThreeFragment"
+    tools:context=".fragments.onboarding.ScreenThreeFragment"
     android:background="@color/main">
 
     <com.google.android.material.imageview.ShapeableImageView

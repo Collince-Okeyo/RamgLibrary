@@ -1,4 +1,4 @@
-package com.ramgdeveloper.ramglibrary.fragments.Onboarding
+package com.ramgdeveloper.ramglibrary.fragments.onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -16,11 +16,6 @@ class ScreenOneFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentScreenOneBinding.inflate(inflater, container, false)
-
-        binding.buttonNext2.setOnClickListener {
-            findNavController().navigate(R.id.action_screenOneFragment_to_screenTwoFragment)
-        }
 
         return binding.root
     }
