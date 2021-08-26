@@ -1,6 +1,8 @@
 package com.ramgdeveloper.ramglibrary.fragments.onboarding
 
+import android.content.Context
 import android.os.Bundle
+import android.view.ContextMenu
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +18,17 @@ class ScreenThreeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        binding = FragmentScreenThreeBinding.inflate(inflater, container, false)
+        binding.buttonFinish.setOnClickListener {
+            findNavController().navigate(R.id.viewPagerFragment_to_homeFragment)
+            onBoaringFinished()
+        }
         return binding.root
+    }
+    private fun onBoaringFinished(){
+        val sharedPreferences = requireContext().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        editor.putBoolean("Finished", true)
+        editor.apply()
     }
 }

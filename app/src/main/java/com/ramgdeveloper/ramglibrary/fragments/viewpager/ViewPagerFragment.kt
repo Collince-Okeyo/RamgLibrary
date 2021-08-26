@@ -5,17 +5,36 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.ramgdeveloper.ramglibrary.databinding.FragmentViewPagerBinding
+import androidx.viewpager2.widget.ViewPager2
+import com.ramgdeveloper.ramglibrary.R
+import com.ramgdeveloper.ramglibrary.adapters.ViewPagerAdapter
+import com.ramgdeveloper.ramglibrary.fragments.onboarding.ScreenOneFragment
+import com.ramgdeveloper.ramglibrary.fragments.onboarding.ScreenThreeFragment
+import com.ramgdeveloper.ramglibrary.fragments.onboarding.ScreenTwoFragment
 
 class ViewPagerFragment : Fragment() {
-    private lateinit var binding: FragmentViewPagerBinding
+    private lateinit var viewPager2: ViewPager2
 
-    override fun onCreateView(
+   override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+        // Inflate the layout for this fragment
+        val view =  inflater.inflate(R.layout.fragment_view_pager, container, false)
 
-        return binding.root
+       viewPager2 = view.findViewById(R.id.viewPager)
+
+       val fragmentList = arrayListOf<Fragment>(
+           ScreenOneFragment(),
+           ScreenTwoFragment(),
+           ScreenThreeFragment()
+       )
+       val adapter = ViewPagerAdapter(
+           fragmentList,
+           requireActivity().supportFragmentManager,
+           lifecycle
+       )
+       viewPager2.adapter = adapter
+       return view
     }
 }

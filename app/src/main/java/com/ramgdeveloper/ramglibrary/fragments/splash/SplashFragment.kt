@@ -1,5 +1,6 @@
 package com.ramgdeveloper.ramglibrary.fragments.splash
 
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import androidx.fragment.app.Fragment
@@ -19,18 +20,24 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       binding = FragmentSplash2Binding.inflate(inflater, container, false)
+       val view = inflater.inflate(R.layout.fragment_splash2, container, false)
         mAuth = FirebaseAuth.getInstance()
         val user = mAuth.currentUser
 
         Handler().postDelayed({
-            if (user != null){
+            if (user != null && onBoardingFinished()){
                 findNavController().navigate(R.id.splash_to_home)
-            }else{
+            }else if (onBoardingFinished()){
                 findNavController().navigate(R.id.splash_to_login)
+            }else{
+                findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
             }
         }, 2000)
 
-        return binding.root
+        return view
+    }
+    private fun onBoardingFinished(): Boolean{
+        val sharePreferences = requireContext().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharePreferences.getBoolean("Finished", false)
     }
 }
