@@ -3,6 +3,7 @@ package com.ramgdeveloper.ramglibrary.fragments.splash
 import android.content.Context
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.databinding.FragmentSplash2Binding
 
+private const val TAG = "SplashFragment"
 class SplashFragment : Fragment() {
     private lateinit var binding: FragmentSplash2Binding
     private lateinit var mAuth: FirebaseAuth
@@ -27,10 +29,13 @@ class SplashFragment : Fragment() {
         Handler().postDelayed({
             if (user != null && onBoardingFinished()){
                 findNavController().navigate(R.id.splash_to_home)
+                Log.d(TAG, "user not null")
             }else if (onBoardingFinished()){
                 findNavController().navigate(R.id.splash_to_login)
+                Log.d(TAG, "user null and onboarding finished")
             }else{
                 findNavController().navigate(R.id.action_splashFragment_to_viewPagerFragment)
+                Log.d(TAG, "new install")
             }
         }, 2000)
 
