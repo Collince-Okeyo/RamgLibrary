@@ -3,13 +3,13 @@ package com.ramgdeveloper.ramglibrary.fragments.auth
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,12 +22,14 @@ import com.ramgdeveloper.ramglibrary.databinding.FragmentLogInBinding
 import com.ramgdeveloper.ramglibrary.others.Utils
 
 private const val TAG = "LogInFragment"
+
 class LogInFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentLogInBinding
+
     private
-    companion object{
+    companion object {
         private const val RC_SIGN_IN = 1
     }
 
@@ -47,24 +49,28 @@ class LogInFragment : Fragment() {
             signIn()
         }
 
-      /*  val email: String = binding.emailLogInET.editText?.text.toString()
-        val password: String  = binding.passwordLogInET.editText?.text.toString()*/
+        /*  val email: String = binding.emailLogInET.editText?.text.toString()
+          val password: String  = binding.passwordLogInET.editText?.text.toString()*/
 
         //Signin with Email and Passwrd
         binding.logInButton.setOnClickListener { it ->
             Utils.hideKeyboard(it)
 
-            when{
-                binding.emailLogInET.editText?.text.toString().isEmpty()-> {
+            when {
+                binding.emailLogInET.editText?.text.toString().isEmpty() -> {
                     binding.emailLogInET.editText?.error = "Email required"
                 }
-                binding.passwordLogInET.editText?.text.toString().isEmpty()-> {
+                binding.passwordLogInET.editText?.text.toString().isEmpty() -> {
                     binding.passwordLogInET.editText?.error = "Password required"
-                }else-> {
-                binding.loginProgressBar.visibility = VISIBLE
-                binding.logInButton.isEnabled = false
+                }
+                else -> {
+                    binding.loginProgressBar.visibility = VISIBLE
+                    binding.logInButton.isEnabled = false
 
-                firebaseAuth.signInWithEmailAndPassword(binding.emailLogInET.editText?.text.toString(), binding.passwordLogInET.editText?.text.toString()).addOnCompleteListener {
+                    firebaseAuth.signInWithEmailAndPassword(
+                        binding.emailLogInET.editText?.text.toString(),
+                        binding.passwordLogInET.editText?.text.toString()
+                    ).addOnCompleteListener {
                         binding.loginProgressBar.visibility = GONE
                         binding.logInButton.isEnabled = true
 
@@ -72,10 +78,14 @@ class LogInFragment : Fragment() {
                         binding.passwordLogInET.editText?.setText("")
 
                         val firebaseUser = firebaseAuth.currentUser!!
-                        if (firebaseUser.isEmailVerified){
+                        if (firebaseUser.isEmailVerified) {
                             findNavController().navigate(R.id.loginFragment_to_homeFragment)
-                        }else{
-                            Toast.makeText(requireContext(), "Please verify your email", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(
+                                requireContext(),
+                                "Please verify your email",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
 
                     }.addOnFailureListener {
@@ -85,8 +95,9 @@ class LogInFragment : Fragment() {
                         binding.emailLogInET.editText?.setText("")
                         binding.passwordLogInET.editText?.setText("")
 
-                        Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
-                }
+                        Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT)
+                            .show()
+                    }
                 }
             }
         }
@@ -115,7 +126,7 @@ class LogInFragment : Fragment() {
         if (requestCode == RC_SIGN_IN) {
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             val exception = task.exception
-            if (task.isSuccessful){
+            if (task.isSuccessful) {
                 try {
                     // Google Sign In was successful, authenticate with Firebase
                     val account = task.getResult(ApiException::class.java)!!

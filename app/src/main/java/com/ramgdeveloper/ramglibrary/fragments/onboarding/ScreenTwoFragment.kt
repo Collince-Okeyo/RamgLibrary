@@ -8,8 +8,6 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.ramgdeveloper.ramglibrary.R
-import com.ramgdeveloper.ramglibrary.databinding.FragmentScreenOneBinding
-import com.ramgdeveloper.ramglibrary.databinding.FragmentScreenTwoBinding
 
 class ScreenTwoFragment : Fragment() {
     override fun onCreateView(
