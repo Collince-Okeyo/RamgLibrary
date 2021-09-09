@@ -53,5 +53,9 @@
         android:id="@+id/registerFragment"
         android:name="com.ramgdeveloper.ramglibrary.fragments.auth.RegisterFragment"
         android:label="fragment_register"
-        tools:layout="@layout/fragment_register" />
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
 </navigation>
