@@ -36,6 +36,7 @@
         app:boxStrokeColor="@color/black"
         app:boxStrokeWidth="2dp"
         app:endIconMode="clear_text"
+        android:hint="First name"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -46,7 +47,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="First name"
             android:inputType="textPersonName"
             android:textColor="@color/black"
             android:textSize="16sp" />
@@ -70,6 +70,7 @@
         app:startIconDrawable="@drawable/ic_person"
         app:boxStrokeWidth="2dp"
         app:endIconTint="@color/black"
+        android:hint="Last name"
         app:boxStrokeColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,7 +79,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Last name"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:inputType="textPersonName"/>
@@ -102,6 +102,7 @@
         app:startIconDrawable="@drawable/ic_email"
         app:boxStrokeWidth="2dp"
         app:endIconTint="@color/black"
+        android:hint="Email"
         app:boxStrokeColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -110,7 +111,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Email"
             android:textColor="@color/black"
             android:textSize="15sp"
             android:inputType="textEmailAddress" />
@@ -136,6 +136,7 @@
         app:hintTextColor="@color/black"
         app:startIconDrawable="@drawable/ic_password"
         app:endIconMode="password_toggle"
+        android:hint="Password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/emailSignUpET">
@@ -143,7 +144,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
             android:textSize="15sp"
             android:textColor="@color/black"
             android:inputType="textPassword"/>
@@ -222,6 +222,7 @@
         app:endIconMode="clear_text"
         app:endIconTint="@color/black"
         app:hintTextColor="@color/black"
+        android:hint="Phone Number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/passwordSignUpET"
@@ -230,7 +231,6 @@
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Phone Number"
             android:inputType="number"
             android:textColor="@color/black"
             android:textSize="15sp" />

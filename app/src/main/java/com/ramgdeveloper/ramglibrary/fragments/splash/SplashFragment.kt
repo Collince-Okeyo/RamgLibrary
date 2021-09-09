@@ -15,7 +15,6 @@ import com.ramgdeveloper.ramglibrary.databinding.FragmentSplash2Binding
 
 private const val TAG = "SplashFragment"
 class SplashFragment : Fragment() {
-    private lateinit var binding: FragmentSplash2Binding
     private lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
@@ -30,7 +29,7 @@ class SplashFragment : Fragment() {
             if (user != null && onBoardingFinished()){
                 findNavController().navigate(R.id.splash_to_home)
                 Log.d(TAG, "user not null")
-            }else if (onBoardingFinished()){
+            }else if (onBoardingFinished() && user == null){
                 findNavController().navigate(R.id.splash_to_login)
                 Log.d(TAG, "user null and onboarding finished")
             }else{

@@ -1,6 +1,7 @@
 package com.ramgdeveloper.ramglibrary.fragments.auth
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,7 @@ import com.ramgdeveloper.ramglibrary.databinding.FragmentHomeBinding
 import com.ramgdeveloper.ramglibrary.databinding.FragmentRegisterBinding
 import com.ramgdeveloper.ramglibrary.others.Utils
 
+private const val TAG = "RegisterFragment"
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
@@ -28,7 +30,6 @@ class RegisterFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
         binding.registerButton.setOnClickListener {
             Utils.hideKeyboard(it)
-
             when{
                 binding.firstNameET.editText?.text.toString().isEmpty()-> {
                     binding.firstNameET.editText?.error = "Enter First Name"
@@ -53,12 +54,13 @@ class RegisterFragment : Fragment() {
                     binding.registerButton.isEnabled = false
                     
                     firebaseAuth.createUserWithEmailAndPassword(binding.emailSignUpET.editText?.text.toString(), 
-                        binding.passwordSignUpET.editText?.text.toString()).addOnSuccessListener {
+                        binding.passwordSignUpET.editText?.text.toString()).addOnCompleteListener {
                         Toast.makeText(requireContext(), "Acount created sucessfully", Toast.LENGTH_SHORT).show()
 
                         binding.progressRegister.visibility = GONE
                         binding.registerButton.isEnabled = true
 
+                        Log.d(TAG, "onCreateView: User created")
                         val firebaseUser = firebaseAuth.currentUser!!
                         firebaseUser.sendEmailVerification().addOnSuccessListener {
                             Toast.makeText(requireContext(),
@@ -72,6 +74,7 @@ class RegisterFragment : Fragment() {
                             binding.phoneET.editText?.setText("")
 
                             findNavController().navigate(R.id.action_registerFragment_to_logInFragment)
+                            Log.d(TAG, "onCreateView: Verification sent")
                         }.addOnFailureListener {
                             Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
 
@@ -83,6 +86,7 @@ class RegisterFragment : Fragment() {
                             binding.emailSignUpET.editText?.setText("")
                             binding.passwordSignUpET.editText?.setText("")
                             binding.phoneET.editText?.setText("")
+                            Log.d(TAG, "onCreateView: Failed")
                         }
                     }
                 }
