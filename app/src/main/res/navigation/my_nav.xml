@@ -27,7 +27,11 @@
         android:id="@+id/homeFragment"
         android:name="com.ramgdeveloper.ramglibrary.fragments.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_logInFragment"
+            app:destination="@id/logInFragment" />
+    </fragment>
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.ramgdeveloper.ramglibrary.fragments.auth.LogInFragment"

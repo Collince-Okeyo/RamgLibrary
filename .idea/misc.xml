@@ -26,6 +26,8 @@
         <entry key="app/src/main/res/layout/fragment_splash2.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/fragment_view_pager.xml" value="0.17447916666666666" />
         <entry key="app/src/main/res/layout/home_row.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/menu/menu.xml" value="0.17447916666666666" />
+        <entry key="app/src/main/res/menu/options_menu.xml" value="0.17447916666666666" />
       </map>
     </option>
   </component>
