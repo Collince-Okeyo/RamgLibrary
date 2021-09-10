@@ -28,15 +28,16 @@ class ForgotPasswordFragment : DialogFragment() {
 
             if (binding.editTextTextEmailAddress.text.toString().isEmpty()){
                 binding.editTextTextEmailAddress.error = "Enter email address"
-            }
-            FirebaseAuth.getInstance().sendPasswordResetEmail(binding.editTextTextEmailAddress.text.toString()).addOnCompleteListener {
-                if (it.isSuccessful){
-                    Toast.makeText(requireContext(), "Please check your email", Toast.LENGTH_SHORT).show()
+            }else{
+                FirebaseAuth.getInstance().sendPasswordResetEmail(binding.editTextTextEmailAddress.text.toString()).addOnCompleteListener {
+                    if (it.isSuccessful){
+                        Toast.makeText(requireContext(), "Please check your email", Toast.LENGTH_SHORT).show()
+                        dismiss()
+                    }
+                }.addOnFailureListener {
+                    Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
                     dismiss()
                 }
-            }.addOnFailureListener {
-                Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
-                dismiss()
             }
 
         }

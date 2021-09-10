@@ -11,7 +11,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import com.ramgdeveloper.ramglibrary.R
+import com.ramgdeveloper.ramglibrary.data.Users
 import com.ramgdeveloper.ramglibrary.databinding.FragmentRegisterBinding
 import com.ramgdeveloper.ramglibrary.others.Utils
 
@@ -20,6 +23,8 @@ private const val TAG = "RegisterFragment"
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var databaseReference: DatabaseReference
+    private lateinit var userID: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,6 +32,7 @@ class RegisterFragment : Fragment() {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
 
         firebaseAuth = FirebaseAuth.getInstance()
+        databaseReference = FirebaseDatabase.getInstance().getReference("users")
         binding.registerButton.setOnClickListener {
             Utils.hideKeyboard(it)
             when {
@@ -68,10 +74,18 @@ class RegisterFragment : Fragment() {
                         Log.d(TAG, "onCreateView: User created")
                         val firebaseUser = firebaseAuth.currentUser!!
                         firebaseUser.sendEmailVerification().addOnSuccessListener {
+                            userID = firebaseAuth.currentUser?.uid.toString()
+
+                            saveUserDetails(
+                                firstName = binding.firstNameET.editText?.text.toString(),
+                                lastName = binding.lastNameET.editText?.text.toString(),
+                                email = binding.emailSignUpET.editText?.text.toString(),
+                                phoneNumber = binding.phoneET.editText?.text.toString()
+                            )
                             Toast.makeText(
                                 requireContext(),
                                 "Email verification link has been sent to" +
-                                        binding.emailSignUpET.editText?.text, Toast.LENGTH_SHORT
+                                        binding.emailSignUpET.editText?.text, Toast.LENGTH_LONG
                             ).show()
 
                             binding.firstNameET.editText?.setText("")
@@ -86,7 +100,7 @@ class RegisterFragment : Fragment() {
                             Toast.makeText(
                                 requireContext(),
                                 it.localizedMessage,
-                                Toast.LENGTH_SHORT
+                                Toast.LENGTH_LONG
                             ).show()
 
                             binding.progressRegister.visibility = GONE
@@ -108,5 +122,15 @@ class RegisterFragment : Fragment() {
             findNavController().navigate(R.id.action_registerFragment_to_logInFragment)
         }
         return binding.root
+    }
+
+    private fun saveUserDetails(
+        firstName: String,
+        lastName: String,
+        email: String,
+        phoneNumber: String
+    ) {
+        val user = Users(firstName, lastName, email, phoneNumber)
+        databaseReference.child(userID).setValue(user)
     }
 }

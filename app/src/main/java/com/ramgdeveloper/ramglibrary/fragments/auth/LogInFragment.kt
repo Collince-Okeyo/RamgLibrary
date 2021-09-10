@@ -79,11 +79,12 @@ class LogInFragment : Fragment() {
 
                         val firebaseUser = firebaseAuth.currentUser!!
                         if (firebaseUser.isEmailVerified) {
+                            Toast.makeText(requireContext(), "Welcome", Toast.LENGTH_SHORT).show()
                             findNavController().navigate(R.id.loginFragment_to_homeFragment)
                         } else {
                             Toast.makeText(
                                 requireContext(),
-                                "Please verify your email",
+                                "Please verify your email first",
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
