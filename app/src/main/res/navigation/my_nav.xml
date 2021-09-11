@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_homeFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addBooksFragment"
+            app:destination="@id/addBooksFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -65,4 +68,9 @@
             android:id="@+id/action_registerFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/addBooksFragment"
+        android:name="com.ramgdeveloper.ramglibrary.fragments.add.AddBooksFragment"
+        android:label="fragment_add_books"
+        tools:layout="@layout/fragment_add_books" />
 </navigation>

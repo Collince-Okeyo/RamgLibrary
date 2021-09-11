@@ -55,7 +55,10 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.3.1')
     //FirebaseAuth
     implementation 'com.google.firebase:firebase-auth'
+    //Firebase database
     implementation 'com.google.firebase:firebase-database-ktx'
+    //Firebase storage
+    implementation 'com.google.firebase:firebase-storage-ktx'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
 
     

@@ -14,15 +14,22 @@ import android.content.Intent
 import android.net.Uri
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
+    private lateinit var databaseReference: DatabaseReference
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        databaseReference = FirebaseDatabase.getInstance().getReference("Caregories")
+        binding.fabAdd.setOnClickListener {
+            findNavController().navigate(R.id.action_homeFragment_to_addBooksFragment)
+        }
 
         binding.homeOptionsMenu.setOnClickListener {
             showOptionsMenu(it)
