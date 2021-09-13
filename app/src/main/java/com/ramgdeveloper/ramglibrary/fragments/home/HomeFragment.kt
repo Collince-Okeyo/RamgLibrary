@@ -12,21 +12,31 @@ import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.databinding.FragmentHomeBinding
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.ramgdeveloper.ramglibrary.adapters.HomeAdapter
+import com.ramgdeveloper.ramglibrary.data.Category
 
+private const val TAG = "HomeFragment"
 class HomeFragment : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var databaseReference: DatabaseReference
+    private lateinit var storageReference: StorageReference
+    private lateinit var categoryList: ArrayList<Category>
+    private val adapter by lazy{HomeAdapter()}
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        databaseReference = FirebaseDatabase.getInstance().getReference("Caregories")
+        loadCategories()
+       // storageReference = FirebaseStorage.getInstance().getReference("images")
         binding.fabAdd.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addBooksFragment)
         }
@@ -74,6 +84,35 @@ class HomeFragment : Fragment() {
             true
         }
         popup.show()
+    }
+
+    //loading Categories
+    private fun loadCategories(){
+        databaseReference = FirebaseDatabase.getInstance().getReference("categories")
+        databaseReference.addValueEventListener(object : ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                categoryList = ArrayList()
+                if (snapshot.exists()){
+                    for (i in snapshot.children){
+                        val category = i.getValue(Category::class.java)
+                        Log.d(TAG, "onDataChange: OnDataChanged: $snapshot")
+
+                        categoryList.add(category!!)
+                    }
+                    adapter.submitList(categoryList)
+                    binding.recyclerView.adapter = adapter
+                }else{
+                    Log.d(TAG, "onDataChange: Failed")
+                    Toast.makeText(requireContext(),
+                        "Failed loading data", Toast.LENGTH_SHORT)
+                        .show()
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+                Log.d(TAG, "onCancelled: OnCancelled: "+error.message)
+                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
 }
