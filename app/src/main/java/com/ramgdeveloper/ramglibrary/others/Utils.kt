@@ -9,4 +9,5 @@ object Utils {
         val imm = view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+    const val REQUEST_ID = 0
 }

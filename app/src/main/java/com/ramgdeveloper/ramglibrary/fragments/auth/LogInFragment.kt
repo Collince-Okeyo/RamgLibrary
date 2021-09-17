@@ -2,7 +2,6 @@ package com.ramgdeveloper.ramglibrary.fragments.auth
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -12,9 +11,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
-import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.ramgdeveloper.ramglibrary.R
@@ -25,7 +24,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-import java.lang.Exception
 
 class LogInFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
@@ -53,6 +51,21 @@ class LogInFragment : Fragment() {
             findNavController().navigate(R.id.logIn_to_registerFragment)
         }
 
+        //Log in with Google
+        binding.googleButton.setOnClickListener {
+            if (loggedInState()){
+                val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                    .requestIdToken(getString(R.string.webclient_id))
+                    .requestEmail()
+                    .build()
+
+                val signInClient = GoogleSignIn.getClient(requireActivity(), options)
+                signInClient.signInIntent.also {
+                    startActivityForResult(it, Utils.REQUEST_ID)
+                }
+            }
+        }
+
         return binding.root
 
     }
@@ -62,23 +75,23 @@ class LogInFragment : Fragment() {
         val email: String = binding.emailLogInET.editText?.text.toString()
         val password: String = binding.passwordLogInET.editText?.text.toString()
 
-        when{
+        when {
             binding.emailLogInET.editText?.text.toString().isEmpty() -> {
                 binding.emailLogInET.editText?.error = "Email required"
             }
             binding.passwordLogInET.editText?.text.toString().isEmpty() -> {
                 binding.passwordLogInET.editText?.error = "Password required"
             }
-            else ->{
+            else -> {
                 binding.loginProgressBar.visibility = VISIBLE
                 binding.logInButton.isEnabled = false
 
-                if (email.isNotEmpty() && password.isNotEmpty()){
+                if (email.isNotEmpty() && password.isNotEmpty()) {
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
                             firebaseAuth.signInWithEmailAndPassword(email, password).await()
 
-                            withContext(Dispatchers.Main){
+                            withContext(Dispatchers.Main) {
 
                                 binding.loginProgressBar.visibility = GONE
                                 binding.logInButton.isEnabled = true
@@ -88,7 +101,11 @@ class LogInFragment : Fragment() {
 
                                 val firebaseUser = firebaseAuth.currentUser
                                 if (firebaseUser!!.isEmailVerified) {
-                                    Toast.makeText(requireContext(), "Logged in Successfully", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Logged in Successfully",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     findNavController().navigate(R.id.loginFragment_to_homeFragment)
                                 } else {
                                     Toast.makeText(
@@ -98,10 +115,11 @@ class LogInFragment : Fragment() {
                                     ).show()
                                 }
                             }
-                        } catch (e: Exception){
-                            withContext(Dispatchers.Main){
+                        } catch (e: Exception) {
+                            withContext(Dispatchers.Main) {
 
-                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG)
+                                    .show()
                                 binding.loginProgressBar.visibility = GONE
                                 binding.logInButton.isEnabled = true
 
@@ -115,4 +133,39 @@ class LogInFragment : Fragment() {
         }
 
     }
+
+    private fun googleAuthForFirebase(account: GoogleSignInAccount?) {
+        val credentials = GoogleAuthProvider.getCredential(account?.idToken, null)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                firebaseAuth.signInWithCredential(credentials).await()
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), "Logged in Successfully", Toast.LENGTH_SHORT)
+                        .show()
+                    findNavController().navigate(R.id.loginFragment_to_homeFragment)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == Utils.REQUEST_ID) {
+            val account = GoogleSignIn.getSignedInAccountFromIntent(data).result
+            account.let {
+                googleAuthForFirebase(it)
+            }
+        }
+    }
+    private fun loggedInState(): Boolean {
+        if (firebaseAuth.currentUser == null){
+            return true
+        }
+        return false
+    }
+
 }

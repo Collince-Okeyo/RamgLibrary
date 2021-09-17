@@ -1,7 +1,6 @@
 package com.ramgdeveloper.ramglibrary.fragments.auth
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
@@ -11,21 +10,16 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.data.Users
 import com.ramgdeveloper.ramglibrary.databinding.FragmentRegisterBinding
-import com.ramgdeveloper.ramglibrary.others.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import kotlinx.coroutines.withContext
-
-private const val TAG = "RegisterFragment"
 
 class RegisterFragment : Fragment() {
     private lateinit var binding: FragmentRegisterBinding
@@ -35,7 +29,7 @@ class RegisterFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentRegisterBinding.inflate(inflater, container, false)
         firebaseAuth = FirebaseAuth.getInstance()
 
@@ -56,7 +50,7 @@ class RegisterFragment : Fragment() {
     }
 
     //Login with Email and Password
-    private fun registerWithEmailAndPAssword(){
+    private fun registerWithEmailAndPAssword() {
         val email = binding.emailSignUpET.editText?.text.toString().trim()
         val password = binding.passwordSignUpET.editText?.text.toString().trim()
         val fnmae = binding.firstNameET.editText?.text.toString().trim()
@@ -65,7 +59,7 @@ class RegisterFragment : Fragment() {
         val user = Users(fnmae, lName, email, phone, password)
 
 
-        when{
+        when {
             binding.firstNameET.editText?.text.toString().isEmpty() -> {
                 binding.firstNameET.editText?.error = "Enter First Name"
             }
@@ -84,21 +78,23 @@ class RegisterFragment : Fragment() {
             binding.passwordSignUpET.editText?.text.toString().length < 8 -> {
                 binding.passwordSignUpET.editText?.error = "Short Password"
             }
-            else ->{
+            else -> {
                 binding.progressRegister.visibility = VISIBLE
                 binding.registerButton.isEnabled = false
 
-                if (email.isNotEmpty() && password.isNotEmpty()){
+                if (email.isNotEmpty() && password.isNotEmpty()) {
                     CoroutineScope(Dispatchers.IO).launch {
                         try {
                             firebaseAuth.createUserWithEmailAndPassword(email, password).await()
                             val firebaseUser = firebaseAuth.currentUser
                             firebaseUser!!.sendEmailVerification().await()
                             saveUserDetails(user)
-                            withContext(Dispatchers.Main){
-                                Toast.makeText(requireContext(),
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(
+                                    requireContext(),
                                     "Acount created sucessfully. Please check your email to veryfy",
-                                    Toast.LENGTH_SHORT).show()
+                                    Toast.LENGTH_SHORT
+                                ).show()
                                 binding.firstNameET.editText?.setText("")
                                 binding.lastNameET.editText?.setText("")
                                 binding.emailSignUpET.editText?.setText("")
@@ -109,9 +105,10 @@ class RegisterFragment : Fragment() {
 
                             }
 
-                        } catch (e: Exception){
-                            withContext(Dispatchers.Main){
-                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
+                        } catch (e: Exception) {
+                            withContext(Dispatchers.Main) {
+                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG)
+                                    .show()
 
                                 binding.progressRegister.visibility = GONE
                                 binding.registerButton.isEnabled = true
@@ -133,8 +130,8 @@ class RegisterFragment : Fragment() {
     private fun saveUserDetails(user: Users) = CoroutineScope(Dispatchers.IO).launch {
         try {
             userCollectionRef.add(user).await()
-        } catch (e: Exception){
-            withContext(Dispatchers.Main){
+        } catch (e: Exception) {
+            withContext(Dispatchers.Main) {
                 Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
             }
         }
