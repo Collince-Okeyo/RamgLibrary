@@ -5,8 +5,8 @@ package com.ramgdeveloper.ramglibrary.data
   val firstName: String? = null,
   val lastName: String? = null,
   val email: String? = null,
-  val phoneNumber: String? = null
-
+  val phoneNumber: String? = null,
+  val passwd: String? = null
 
  )
 
