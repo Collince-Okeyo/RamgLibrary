@@ -154,10 +154,18 @@ class LogInFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == Utils.REQUEST_ID) {
-            val account = GoogleSignIn.getSignedInAccountFromIntent(data).result
-            account.let {
-                googleAuthForFirebase(it)
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                if (requestCode == Utils.REQUEST_ID && data != null) {
+                    val account = GoogleSignIn.getSignedInAccountFromIntent(data).result
+                    account.let {
+                        googleAuthForFirebase(it)
+                    }
+                }
+            } catch (e : Exception){
+                withContext(Dispatchers.Main){
+                    Toast.makeText(requireContext(), "Not Registered", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }

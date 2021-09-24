@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View.INVISIBLE
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.target.Target
 import com.ramgdeveloper.ramglibrary.data.Category
 import com.ramgdeveloper.ramglibrary.databinding.HomeRowBinding
+import com.ramgdeveloper.ramglibrary.fragments.home.HomeFragmentDirections
 
 class HomeAdapter(private val onClickListener: OnClickListener) : ListAdapter<Category, HomeAdapter.MyViewHolder>(MyDiffUtil){
     object MyDiffUtil: DiffUtil.ItemCallback<Category>() {
@@ -64,6 +66,11 @@ class HomeAdapter(private val onClickListener: OnClickListener) : ListAdapter<Ca
             onClickListener.onClick(categories)
         }
         holder.bind(categories)
+
+        /*holder.itemView.setOnClickListener {
+           // val action = HomeFragmentDirections.actionHomeFragmentToDisplayFragment(ftrhrt)
+           // Navigation.findNavController(it).navigate(action)
+        }*/
     }
 
     class OnClickListener(val clickListener: (category: Category)-> Unit){

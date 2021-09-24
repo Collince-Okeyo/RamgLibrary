@@ -4,4 +4,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>  
     <string name="webclient_id">"291129252712-d161o1i86b60u691u0qoebhi682hufbh.apps.googleusercontent.com"</string>
 
+    <string-array name="categories">
+        <item>Articles</item>
+        <item>Biology</item>
+        <item>Business</item>
+        <item>Agriculture</item>
+        <item>Literature and Linguistics</item>
+        <item>Science and Fiction</item>
+        <item>Mathematics</item>
+        <item>Kids</item>
+        <item>History</item>
+        <item>Politics</item>
+        <item>Biology</item>
+        <item>Physics</item>
+        <item>History</item>
+        <item>Religion</item>
+        <item>Computer and Technology</item>
+    </string-array>
+
 </resources>

@@ -13,6 +13,10 @@ import com.google.firebase.auth.FirebaseAuth
 import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.databinding.FragmentForgotPasswordBinding
 import com.ramgdeveloper.ramglibrary.others.Utils
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class ForgotPasswordFragment : DialogFragment() {
     private lateinit var binding: FragmentForgotPasswordBinding
@@ -21,22 +25,34 @@ class ForgotPasswordFragment : DialogFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
+        binding = FragmentForgotPasswordBinding.inflate(inflater, container, false)
 
         binding.textViewConfirm.setOnClickListener {
             Utils.hideKeyboard(it)
 
-            if (binding.editTextTextEmailAddress.text.toString().isEmpty()){
+            if (binding.editTextTextEmailAddress.text.toString().isEmpty()) {
                 binding.editTextTextEmailAddress.error = "Enter email address"
-            }else{
-                FirebaseAuth.getInstance().sendPasswordResetEmail(binding.editTextTextEmailAddress.text.toString()).addOnCompleteListener {
-                    if (it.isSuccessful){
-                        Toast.makeText(requireContext(), "Please check your email", Toast.LENGTH_SHORT).show()
+            } else {
+            }
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    FirebaseAuth.getInstance()
+                        .sendPasswordResetEmail(binding.editTextTextEmailAddress.text.toString())
+                        .addOnCompleteListener {
+                            if (it.isSuccessful) {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Please check your email",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                                dismiss()
+                            }
+                        }
+                } catch (e : Exception){
+                    withContext(Dispatchers.Main){
+                        Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
                         dismiss()
                     }
-                }.addOnFailureListener {
-                    Toast.makeText(requireContext(), it.localizedMessage, Toast.LENGTH_SHORT).show()
-                    dismiss()
                 }
             }
 
@@ -48,9 +64,4 @@ class ForgotPasswordFragment : DialogFragment() {
 
         return binding.root
     }
-/*
-    private fun View.hideKeyboard() {
-        val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(windowToken, 0)
-    }*/
 }
