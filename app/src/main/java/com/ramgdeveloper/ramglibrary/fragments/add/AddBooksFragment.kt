@@ -10,9 +10,15 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.databinding.FragmentAddBooksBinding
+import android.content.Intent
 
+import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.navigation.fragment.findNavController
+
+private const  val PICK_PDF_CODE = 2
 class AddBooksFragment : Fragment() {
     private lateinit var binding: FragmentAddBooksBinding
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -20,8 +26,20 @@ class AddBooksFragment : Fragment() {
     ): View? {
         binding = FragmentAddBooksBinding.inflate(inflater, container, false)
 
-        val spinner = binding.spinnerCategory
+        // Pick TextView
+        binding.pickTV.setOnClickListener {
+            val intentPDF = Intent(Intent.ACTION_GET_CONTENT)
+            intentPDF.type = "application/pdf"
+            intentPDF.addCategory(Intent.CATEGORY_OPENABLE)
+            startActivityForResult(Intent.createChooser(intentPDF, "Select Picture"), PICK_PDF_CODE)
+        }
 
+        binding.addBackArrow.setOnClickListener {
+            findNavController().navigate(R.id.action_addBooksFragment_to_homeFragment)
+        }
+
+        // Category Spinner
+        val spinner = binding.spinnerCategory
         if (spinner != null) {
             val adapter = ArrayAdapter.createFromResource(requireContext(),
                 R.array.categories, android.R.layout.simple_spinner_item)

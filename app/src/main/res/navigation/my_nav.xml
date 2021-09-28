@@ -75,7 +75,11 @@
         android:id="@+id/addBooksFragment"
         android:name="com.ramgdeveloper.ramglibrary.fragments.add.AddBooksFragment"
         android:label="fragment_add_books"
-        tools:layout="@layout/fragment_add_books" />
+        tools:layout="@layout/fragment_add_books" >
+        <action
+            android:id="@+id/action_addBooksFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/displayFragment"
         android:name="com.ramgdeveloper.ramglibrary.fragments.display.DisplayFragment"

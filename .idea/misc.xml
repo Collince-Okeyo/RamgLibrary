@@ -3,7 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/curve.xml" value="0.2203125" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/ic_baseline_arrow.xml" value="0.2203125" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/spinner_border.xml" value="0.2203125" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_add_books.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_display.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_log_in.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_register.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_screen_one.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_screen_three.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_splash2.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_view_pager.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/home_row.xml" value="0.20416666666666666" />
         <entry key="app/src/main/res/drawable/curve.xml" value="0.190625" />
         <entry key="app/src/main/res/drawable/ic_dot1.xml" value="0.190625" />
         <entry key="app/src/main/res/drawable/ic_dot2.xml" value="0.190625" />

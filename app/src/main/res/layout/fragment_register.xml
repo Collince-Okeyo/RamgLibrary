@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main"
     tools:context=".fragments.auth.RegisterFragment">
 
     <com.google.android.material.textview.MaterialTextView
@@ -13,7 +12,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="Register"
-        android:textColor="@color/white"
+        android:textColor="@color/purple"
         android:textSize="40sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -167,8 +166,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Already have an account? LogIn"
-        android:textColor="@color/white"
-        android:textSize="18sp"
+        android:textColor="@color/main"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="parent"
@@ -180,7 +179,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="- - Or - -"
-        android:textColor="@color/white"
+        android:textColor="@color/main"
         android:textSize="26sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -243,8 +242,10 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.667" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

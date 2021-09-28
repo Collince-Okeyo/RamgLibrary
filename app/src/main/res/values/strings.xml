@@ -5,6 +5,7 @@
     <string name="webclient_id">"291129252712-d161o1i86b60u691u0qoebhi682hufbh.apps.googleusercontent.com"</string>
 
     <string-array name="categories">
+        <item>Choose Category</item>
         <item>Articles</item>
         <item>Biology</item>
         <item>Business</item>
