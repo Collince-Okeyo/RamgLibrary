@@ -5,7 +5,9 @@
       <map>
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/curve.xml" value="0.2203125" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/ic_baseline_arrow.xml" value="0.2203125" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/ic_left_arrow.xml" value="0.2203125" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/spinner_border.xml" value="0.2203125" />
+        <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/display_row.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_add_books.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_display.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
