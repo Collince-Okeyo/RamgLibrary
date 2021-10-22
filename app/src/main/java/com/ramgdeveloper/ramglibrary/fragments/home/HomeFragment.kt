@@ -32,8 +32,10 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        adapter = HomeAdapter(HomeAdapter.OnClickListener {
-            Toast.makeText(requireContext(), "Happy Study Time", Toast.LENGTH_SHORT).show()
+        adapter = HomeAdapter(HomeAdapter.OnClickListener { category ->
+            Toast.makeText(requireContext(), category.categoryName, Toast.LENGTH_SHORT).show()
+            val action = HomeFragmentDirections.actionHomeFragmentToDisplayFragment(category)
+            findNavController().navigate(action)
         })
         loadCategories()
         // storageReference = FirebaseStorage.getInstance().getReference("images")

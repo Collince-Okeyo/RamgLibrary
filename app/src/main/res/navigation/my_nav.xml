@@ -86,7 +86,7 @@
         android:label="fragment_display"
         tools:layout="@layout/fragment_display" >
         <argument
-            android:name="booksDisplay"
+            android:name="categoryName"
             app:argType="com.ramgdeveloper.ramglibrary.data.Category" />
     </fragment>
 </navigation>
