@@ -34,7 +34,7 @@ class DisplayFragment : Fragment() {
         binding = FragmentDisplayBinding.inflate(inflater, container, false)
 
         binding.displayBackArrow.setOnClickListener {
-            //findNavController().navigate()
+            findNavController().navigate(R.id.action_displayFragment_to_homeFragment)
         }
 
         val details = DisplayFragmentArgs.fromBundle(requireArguments()).categoryName
@@ -49,7 +49,7 @@ class DisplayFragment : Fragment() {
         return binding.root
     }
 
-    fun getBooks(category: String) {
+    private fun getBooks(category: String) {
         val booksList = ArrayList<Books>()
         CoroutineScope(Dispatchers.Main).launch {
             val result = databaseReference.child(category).get().await()

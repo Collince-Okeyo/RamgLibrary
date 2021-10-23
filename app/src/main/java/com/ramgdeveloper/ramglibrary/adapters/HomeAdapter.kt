@@ -66,11 +66,6 @@ class HomeAdapter(private val onClickListener: OnClickListener) : ListAdapter<Ca
             onClickListener.onClick(categories)
         }
         holder.bind(categories)
-
-        /*holder.itemView.setOnClickListener {
-           // val action = HomeFragmentDirections.actionHomeFragmentToDisplayFragment(ftrhrt)
-           // Navigation.findNavController(it).navigate(action)
-        }*/
     }
 
     class OnClickListener(val clickListener: (category: Category)-> Unit){

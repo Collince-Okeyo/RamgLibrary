@@ -48,6 +48,7 @@ class AddBooksFragment : Fragment() {
     private val auth = FirebaseAuth.getInstance()
     private lateinit var databaseReference: DatabaseReference
     private lateinit var pdfUri: Uri
+    private lateinit var myCategory: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,14 +76,12 @@ class AddBooksFragment : Fragment() {
                 }
                 else -> {
                     try {
-                        addBooksToFirebase("yuvug",pdfUri!!, "Title", "Resuldkl")
-                        //category: String ,pdfUri: Uri,bookTitle: String,description: String
+                        addBooksToFirebase()
                     } catch (e: Exception) {
                         Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
                     }
                 }
             }
-
         }
 
         // Pick Book
@@ -110,7 +109,7 @@ class AddBooksFragment : Fragment() {
 
             spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
-                    val item = p0?.getItemAtPosition(p2)
+                    myCategory = p0?.getItemAtPosition(p2).toString()
                     // binding.titleEditText.text = item as Editable?
                 }
 
@@ -130,12 +129,8 @@ class AddBooksFragment : Fragment() {
             1212 -> if (resultCode === RESULT_OK) {
 
                 pdfUri = data?.data!!
-
-                // Get the Uri of the selected file
                 val uri: Uri = data?.data!!
                 val uriString: String = uri.toString()
-                /*val myFile: File = File(uriString)
-                val path: String = myFile.name*/
                 var displayName: String? = null
                 if (uriString.startsWith("content://")) {
                     var cursor: Cursor? = null
@@ -152,12 +147,10 @@ class AddBooksFragment : Fragment() {
                     }
                 }
             }
-
-
         }
     }
 
-    private fun addBooksToFirebase(category: String ,pdfUri: Uri,bookTitle: String,description: String){
+    private fun addBooksToFirebase(){
        /* val pd = ProgressDialog(requireContext())
         pd.setTitle("Uploading Contents...")
         pd.setCancelable(false)
@@ -171,15 +164,20 @@ class AddBooksFragment : Fragment() {
            Log.d(TAG, "addBooksToFirebase: $pdfUrl")
 
            val book = Books(
-               postId = postId,
+               /*postId = postId,
                title = bookTitle,
                description = description,
                category= category,
-               bookUrl = pdfUrl
+               bookUrl = pdfUrl*/
+               postId,
+               binding.titleEditText.text.toString(),
+               binding.addDescriptionTV.text.toString(),
+               binding.spinnerCategory.selectedItem.toString(),
+               pdfUrl
            )
 
            //Database
-           databaseReference.child("Biology").push().setValue(book).await()
+           databaseReference.child(binding.spinnerCategory.selectedItem.toString()).push().setValue(book).await()
        }
 
     }
