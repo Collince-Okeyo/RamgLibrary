@@ -7,6 +7,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
@@ -95,6 +97,8 @@ class HomeFragment : Fragment() {
 
     //loading Categories
     private fun loadCategories() {
+
+        binding.progressBar2.visibility = VISIBLE
         databaseReference = FirebaseDatabase.getInstance().getReference("categories")
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -108,6 +112,7 @@ class HomeFragment : Fragment() {
                     }
                     adapter.submitList(categoryList)
                     binding.recyclerView.adapter = adapter
+                    binding.progressBar2.visibility = INVISIBLE
                 } else {
                     Log.d(TAG, "onDataChange: Failed")
                     Toast.makeText(

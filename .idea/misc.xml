@@ -3,9 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/hp/StudioProjects/RamgLibrary/app/src/main/res/drawable/pick_background.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/hp/StudioProjects/RamgLibrary/app/src/main/res/layout/display_row.xml" value="0.209375" />
         <entry key="..\:/Users/hp/StudioProjects/RamgLibrary/app/src/main/res/layout/fragment_add_books.xml" value="0.1962962962962963" />
         <entry key="..\:/Users/hp/StudioProjects/RamgLibrary/app/src/main/res/layout/fragment_display.xml" value="0.25" />
+        <entry key="..\:/Users/hp/StudioProjects/RamgLibrary/app/src/main/res/layout/fragment_home.xml" value="0.209375" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/curve.xml" value="0.2203125" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/ic_baseline_arrow.xml" value="0.2203125" />
         <entry key="..\:/Users/maure/AndroidStudioProjects/RamgLibrary/app/src/main/res/drawable/ic_left_arrow.xml" value="0.2203125" />

@@ -1,47 +1,40 @@
 package com.ramgdeveloper.ramglibrary.fragments.add
 
-import android.R.attr
+import android.app.Activity.RESULT_OK
+import android.app.ProgressDialog
+import android.content.Intent
+import android.database.Cursor
+import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import androidx.fragment.app.Fragment
+import android.provider.OpenableColumns
+import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.ramgdeveloper.ramglibrary.R
-import com.ramgdeveloper.ramglibrary.databinding.FragmentAddBooksBinding
-import android.content.Intent
 import android.widget.Toast
-
-import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import android.provider.OpenableColumns
-
-import android.R.attr.data
-import android.app.Activity.RESULT_OK
-import android.database.Cursor
-import android.net.Uri
-import java.io.File
-import android.app.ProgressDialog
-import android.text.TextUtils
-import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.data.Books
+import com.ramgdeveloper.ramglibrary.databinding.FragmentAddBooksBinding
 import com.ramgdeveloper.ramglibrary.others.Utils
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.withContext
 import java.util.*
 
 private const val TAG = "AddBooksFragment"
+
 class AddBooksFragment : Fragment() {
     private lateinit var binding: FragmentAddBooksBinding
     private val firebaseStorage = Firebase.storage
@@ -57,6 +50,7 @@ class AddBooksFragment : Fragment() {
         binding = FragmentAddBooksBinding.inflate(inflater, container, false)
 
         databaseReference = FirebaseDatabase.getInstance().getReference("books")
+
         // Upload button
         binding.buttonAdd.setOnClickListener {
             Utils.hideKeyboard(it)
@@ -93,6 +87,7 @@ class AddBooksFragment : Fragment() {
             startActivityForResult(intent, 1212)
         })
 
+        //Navigating back to Home
         binding.addBackArrow.setOnClickListener {
             findNavController().navigate(R.id.action_addBooksFragment_to_homeFragment)
         }
@@ -150,35 +145,38 @@ class AddBooksFragment : Fragment() {
         }
     }
 
-    private fun addBooksToFirebase(){
-       /* val pd = ProgressDialog(requireContext())
+    private fun addBooksToFirebase() {
+        val pd = ProgressDialog(requireContext())
         pd.setTitle("Uploading Contents...")
         pd.setCancelable(false)
-        pd.show()*/
+        pd.show()
 
-       CoroutineScope(Dispatchers.IO).launch {
-           val uid = auth.uid!!
-           val postId = UUID.randomUUID().toString()
-           val pdf = firebaseStorage.getReference(postId).putFile(pdfUri).await()
-           val pdfUrl = pdf?.metadata?.reference?.downloadUrl?.await().toString()
-           Log.d(TAG, "addBooksToFirebase: $pdfUrl")
+        CoroutineScope(Dispatchers.IO).launch {
+            val uid = auth.uid!!
+            val postId = UUID.randomUUID().toString()
+            val pdf = firebaseStorage.getReference(postId).putFile(pdfUri).await()
+            val pdfUrl = pdf?.metadata?.reference?.downloadUrl?.await().toString()
+            Log.d(TAG, "addBooksToFirebase: $pdfUrl")
 
-           val book = Books(
-               /*postId = postId,
-               title = bookTitle,
-               description = description,
-               category= category,
-               bookUrl = pdfUrl*/
-               postId,
-               binding.titleEditText.text.toString(),
-               binding.addDescriptionTV.text.toString(),
-               binding.spinnerCategory.selectedItem.toString(),
-               pdfUrl
-           )
+            val book = Books(
+                postId,
+                binding.titleEditText.text.toString(),
+                binding.addDescriptionTV.text.toString(),
+                binding.spinnerCategory.selectedItem.toString(),
+                pdfUrl
+            )
 
-           //Database
-           databaseReference.child(binding.spinnerCategory.selectedItem.toString()).push().setValue(book).await()
-       }
+            //Database
+            databaseReference.child(binding.spinnerCategory.selectedItem.toString()).push()
+                .setValue(book).await()
+            // binding.spinnerCategory.selectedItem.toString() = "Choose Category"
+            withContext(Dispatchers.Main) {
+                binding.pickTV.text = "Pick Book/PDF"
+                binding.titleEditText.setText("")
+                binding.addDescriptionTV.setText("")
+                pd.dismiss()
+            }
+        }
 
     }
 }
