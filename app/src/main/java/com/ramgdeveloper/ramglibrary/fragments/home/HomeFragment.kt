@@ -99,6 +99,7 @@ class HomeFragment : Fragment() {
     private fun loadCategories() {
 
         binding.progressBar2.visibility = VISIBLE
+        binding.laodingCategory.visibility = VISIBLE
         databaseReference = FirebaseDatabase.getInstance().getReference("categories")
         databaseReference.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -113,6 +114,7 @@ class HomeFragment : Fragment() {
                     adapter.submitList(categoryList)
                     binding.recyclerView.adapter = adapter
                     binding.progressBar2.visibility = INVISIBLE
+                    binding.laodingCategory.visibility = INVISIBLE
                 } else {
                     Log.d(TAG, "onDataChange: Failed")
                     Toast.makeText(
@@ -125,7 +127,7 @@ class HomeFragment : Fragment() {
 
             override fun onCancelled(error: DatabaseError) {
                 Log.d(TAG, "onCancelled: OnCancelled: " + error.message)
-                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
+//                Toast.makeText(requireContext(), error.message, Toast.LENGTH_SHORT).show()
             }
         })
     }

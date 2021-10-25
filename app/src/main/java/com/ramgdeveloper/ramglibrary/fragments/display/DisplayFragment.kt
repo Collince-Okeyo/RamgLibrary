@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.INVISIBLE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -23,7 +25,7 @@ import kotlinx.coroutines.tasks.await
 private const val TAG = "DisplayFragment"
 class DisplayFragment : Fragment() {
     private lateinit var binding: FragmentDisplayBinding
-    private val adapter:DisplayAdapter by lazy { DisplayAdapter() }
+    private val adapter:DisplayAdapter by lazy { DisplayAdapter(requireContext()) }
     private lateinit var databaseReference: DatabaseReference
 
 
@@ -50,6 +52,8 @@ class DisplayFragment : Fragment() {
     }
 
     private fun getBooks(category: String) {
+        binding.progressBar3.visibility = VISIBLE
+        binding.loadingTV.visibility = VISIBLE
         val booksList = ArrayList<Books>()
         CoroutineScope(Dispatchers.Main).launch {
             val result = databaseReference.child(category).get().await()
@@ -63,6 +67,8 @@ class DisplayFragment : Fragment() {
             //
             adapter.submitList(booksList)
             binding.recyclerView2.adapter = adapter
+            binding.progressBar3.visibility = INVISIBLE
+            binding.loadingTV.visibility = INVISIBLE
         }
     }
 }

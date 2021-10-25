@@ -169,7 +169,6 @@ class AddBooksFragment : Fragment() {
             //Database
             databaseReference.child(binding.spinnerCategory.selectedItem.toString()).push()
                 .setValue(book).await()
-            // binding.spinnerCategory.selectedItem.toString() = "Choose Category"
             withContext(Dispatchers.Main) {
                 binding.pickTV.text = "Pick Book/PDF"
                 binding.titleEditText.setText("")

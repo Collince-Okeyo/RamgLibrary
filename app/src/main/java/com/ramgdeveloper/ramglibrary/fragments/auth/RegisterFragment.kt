@@ -40,12 +40,6 @@ class RegisterFragment : Fragment() {
         binding.logInTV.setOnClickListener {
             findNavController().navigate(R.id.action_registerFragment_to_logInFragment)
         }
-
-        binding.googleSignUp.setOnClickListener {
-            Toast.makeText(requireContext(), "Comming Soon", Toast.LENGTH_LONG).show()
-        }
-
-
         return binding.root
     }
 
@@ -92,8 +86,8 @@ class RegisterFragment : Fragment() {
                             withContext(Dispatchers.Main) {
                                 Toast.makeText(
                                     requireContext(),
-                                    "Acount created sucessfully. Please check your email to veryfy",
-                                    Toast.LENGTH_SHORT
+                                    "Account created successfully. Please check your email to verify",
+                                    Toast.LENGTH_LONG
                                 ).show()
                                 binding.firstNameET.editText?.setText("")
                                 binding.lastNameET.editText?.setText("")

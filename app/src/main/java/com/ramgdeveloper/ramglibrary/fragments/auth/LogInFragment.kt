@@ -4,8 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.GONE
-import android.view.View.VISIBLE
+import android.view.View.*
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -27,7 +26,6 @@ import kotlinx.coroutines.withContext
 
 class LogInFragment : Fragment() {
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var googleSignInClient: GoogleSignInClient
     private lateinit var binding: FragmentLogInBinding
 
     override fun onCreateView(
@@ -36,7 +34,8 @@ class LogInFragment : Fragment() {
     ): View? {
         binding = FragmentLogInBinding.inflate(inflater, container, false)
         firebaseAuth = FirebaseAuth.getInstance()
-        //Signin with Email and Passwrd
+
+        //Sign in with Email and Password
         binding.logInButton.setOnClickListener { it ->
             Utils.hideKeyboard(it)
             logInWithEmailAndPassword()
@@ -53,6 +52,7 @@ class LogInFragment : Fragment() {
 
         //Log in with Google
         binding.googleButton.setOnClickListener {
+            binding.googleProgress.visibility = VISIBLE
             if (loggedInState()){
                 val options = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                     .requestIdToken(getString(R.string.webclient_id))
@@ -62,12 +62,11 @@ class LogInFragment : Fragment() {
                 val signInClient = GoogleSignIn.getClient(requireActivity(), options)
                 signInClient.signInIntent.also {
                     startActivityForResult(it, Utils.REQUEST_ID)
+                    binding.googleProgress.visibility = INVISIBLE
                 }
             }
         }
-
         return binding.root
-
     }
 
     //Login with email and password
@@ -92,10 +91,8 @@ class LogInFragment : Fragment() {
                             firebaseAuth.signInWithEmailAndPassword(email, password).await()
 
                             withContext(Dispatchers.Main) {
-
                                 binding.loginProgressBar.visibility = GONE
                                 binding.logInButton.isEnabled = true
-
                                 binding.emailLogInET.editText?.setText("")
                                 binding.passwordLogInET.editText?.setText("")
 
@@ -117,12 +114,9 @@ class LogInFragment : Fragment() {
                             }
                         } catch (e: Exception) {
                             withContext(Dispatchers.Main) {
-
-                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG)
-                                    .show()
+                                Toast.makeText(requireContext(), e.message, Toast.LENGTH_LONG).show()
                                 binding.loginProgressBar.visibility = GONE
                                 binding.logInButton.isEnabled = true
-
                                 binding.emailLogInET.editText?.setText("")
                                 binding.passwordLogInET.editText?.setText("")
                             }
