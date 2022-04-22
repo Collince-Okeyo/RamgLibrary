@@ -38,7 +38,7 @@ class HomeAdapter(private val onClickListener: OnClickListener) : ListAdapter<Ca
                         target: Target<Drawable>?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        binding.progressBar.visibility = INVISIBLE
+                        //binding.progressBar.visibility = INVISIBLE
                         return false
                     }
 
@@ -49,7 +49,7 @@ class HomeAdapter(private val onClickListener: OnClickListener) : ListAdapter<Ca
                         dataSource: DataSource?,
                         isFirstResource: Boolean
                     ): Boolean {
-                        binding.progressBar.visibility = INVISIBLE
+                        //binding.progressBar.visibility = INVISIBLE
                         return false
                     }
                 })
