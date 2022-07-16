@@ -1,4 +1,4 @@
-# Taskify_Material_3
+# RamgLibrary
 
 RamgLibrary is a mobile application used to store and access e-books online. It allows users to have access to books that are uploaded in the app. The user can also download the books to their internal phone storage.
 
@@ -24,8 +24,8 @@ The main aim to build this app is to learn the following topic:
 <p float="left">
 <img src="screenshots/splash.png" width=250/>
 <img src="screenshots/onboarding1.png" width=250/>
-<img src="screenshots/onboarding12.png" width=250/>
-<img src="screenshots/onboarding13.png" width=250/>
+<img src="screenshots/onboarding2.png" width=250/>
+<img src="screenshots/onboarding3.png" width=250/>
 <img src="screenshots/login.png" width=250/>
 <img src="screenshots/signup.png" width=250/>
 <img src="screenshots/home.png" width=250/>
