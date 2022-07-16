@@ -1,16 +1,12 @@
 package com.ramgdeveloper.ramglibrary.fragments.auth
 
-import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import com.google.firebase.auth.FirebaseAuth
-import com.ramgdeveloper.ramglibrary.R
 import com.ramgdeveloper.ramglibrary.databinding.FragmentForgotPasswordBinding
 import com.ramgdeveloper.ramglibrary.others.Utils
 import kotlinx.coroutines.CoroutineScope
